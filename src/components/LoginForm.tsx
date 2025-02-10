@@ -70,7 +70,7 @@ export const LoginForm = () => {
               >
                 {error ? (
                   <p className="!text-red-900 text-sm font-bold leading-[30px]">
-                    Enter Your Email
+                    Email required
                   </p>
                 ) : (
                   <p className="text-gray text-sm leading-[30px]">Email</p>
@@ -128,7 +128,7 @@ export const LoginForm = () => {
                 </span>
                 <Link
                   href="/"
-                  className="font-inter leading-6 text-blue-light max-sm:mt-[18px]"
+                  className="font-inter leading-6 text-blue-500 max-sm:mt-[18px]"
                 >
                   Forgot Password
                 </Link>
