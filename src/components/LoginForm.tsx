@@ -148,14 +148,6 @@ export const LoginForm = () => {
                 />
                 Sign in with Google
               </button>
-              <span className="flex w-full justify-center gap-2.5 mt-[18px]">
-                <p className="font-inter leading-6 text-gray-dark">
-                  Don’t have an account?
-                </p>
-                <Link href={"/"} className="text-blue-light font-inter">
-                  Sign up
-                </Link>
-              </span>
             </form>
             <p className="text-center text-base pt-[18px] text-medium-gray leading-6 max-md:text-start">
               Don’t have an account?
