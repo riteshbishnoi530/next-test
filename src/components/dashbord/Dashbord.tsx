@@ -23,7 +23,7 @@ const Dashboard = () => {
             ImageUploader
           </Link>
           <Link
-            href="/value"
+            href="/local-storage"
             className="text-white flex items-center justify-center bg-black font-medium text-base leading-6 border border-solid border-white rounded-xl p-4"
           >
             ValueBtn
