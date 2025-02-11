@@ -49,15 +49,15 @@ const UploadImage = () => {
           {uploadImgs.length > 0 && (
             <div className="mt-6 grid grid-cols-2 gap-4">
               {uploadImgs.map((img, index) => (
-                <div key={index} className="relative group">
+                <div key={index} className="relative">
                   <img
-                    className="w-full h-32 object-cover rounded-md shadow-md transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-32 object-cover rounded-md shadow-md transition-transform duration-300"
                     src={img}
                     alt="Uploaded image"
                   />
                   <button
                     onClick={() => removeImage(index)}
-                    className="absolute top-0 right-0 bg-red-500 min-w-[20px] text-white px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    className="absolute top-0 right-0 bg-black min-w-[20px] text-white px-2 py-1 rounded-full"
                   >
                     X
                   </button>
@@ -68,7 +68,7 @@ const UploadImage = () => {
           {uploadImgs.length > 0 && (
             <button
               onClick={removeHandler}
-              className="mt-6 w-full py-2 bg-red-500 text-white rounded-md font-semibold hover:bg-red-600 transition duration-300"
+              className="mt-6 w-fit px-4 py-2 bg-red-500 text-white rounded-md font-semibold hover:bg-red-600 transition duration-300"
             >
               Remove All Images
             </button>

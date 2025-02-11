@@ -27,8 +27,7 @@ export const LoginForm = () => {
     setError(true);
     if (
       formData.email !== "" &&
-      formData.password.length >= 6 &&
-      !passwordError
+      formData.password !== "" && !passwordError
     ) {
       setFormData({
         email: "",
@@ -39,9 +38,7 @@ export const LoginForm = () => {
       setPasswordError("");
       localStorage.setItem("isAuthenticated", "true");
       router.push("/dashbord");
-    } else if (formData.password.length < 6) {
-      setPasswordError("Password must be at least 6 characters long");
-    }
+    } 
   };
 
   return (
@@ -69,7 +66,7 @@ export const LoginForm = () => {
                 className=" font-medium leading-5 text-black-light"
               >
                 {error ? (
-                  <p className="!text-red-900 text-sm font-bold leading-[30px]">
+                  <p className="!text-red-500 text-sm font-bold leading-[30px]">
                     Email required
                   </p>
                 ) : (
@@ -91,7 +88,7 @@ export const LoginForm = () => {
                 className=" font-medium leading-5 text-black-light"
               >
                 {error || passwordError ? (
-                  <p className="!text-red-900 font-bold text-sm leading-[30px]">
+                  <p className="!text-red-500 font-bold text-sm leading-[30px]">
                     {passwordError || "Password required"}
                   </p>
                 ) : (
@@ -99,6 +96,7 @@ export const LoginForm = () => {
                 )}
               </label>
               <input
+              minLength={6}
                 value={formData.password}
                 onChange={(e: any) =>
                   setFormData({ ...formData, password: e.target.value })
