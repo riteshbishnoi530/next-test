@@ -11,8 +11,10 @@
   "dependencies": {
     "next": "15.1.6",
     "react": "^19.0.0",
+    "react-calendly": "^4.3.1",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.5"
+    "react-router-dom": "^7.1.5",
+    "sweetalert2": "^11.16.0"
   },
   "devDependencies": {
     "@types/node": "^20",

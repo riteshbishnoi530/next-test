@@ -84,7 +84,7 @@ const Dashboard = () => {
             ></span>
           </button>
           <h1 className="text-white font-semibold font-inter text-3xl max-md:text-2xl">
-            Welcome to Dashboard
+            {page==="values"?"Values":page==="calendly"?"Calendly":page==="images"?"Images":"Dashboard"}
           </h1>
         </div>
         {page === "values" ? (
