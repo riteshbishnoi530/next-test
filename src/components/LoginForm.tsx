@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 export const LoginForm = () => {
   const router = useRouter();
 
-  // Initializing state with an object similar to the structure you provided
   const initialFormData = {
     email: "",
     password: "",
@@ -17,9 +16,8 @@ export const LoginForm = () => {
 
   const [value, setValue] = useState(initialFormData);
   const [error, setError] = useState(false);
-  const [passwordError, setPasswordError] = useState(""); // New state for password error
+  const [passwordError, setPasswordError] = useState("");
 
-  // Redirect to dashboard if already authenticated
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("isAuthenticated");
     if (isAuthenticated === "true") {
@@ -27,21 +25,17 @@ export const LoginForm = () => {
     }
   }, [router]);
 
-  // Form submit handler with validation
   const submitHandle = (e: React.FormEvent) => {
     e.preventDefault();
     setError(true);
-    setPasswordError(""); // Reset password error on submit
+    setPasswordError("");
 
-    // Validate email, password, and checkbox
     if (value.email !== "" && value.password !== "" && value.checkbox) {
-      // Check password length (minimum 6 characters)
       if (value.password.length < 6) {
         setPasswordError("Password must be at least 6 characters long.");
-        return; // Stop form submission if password is invalid
+        return;
       }
 
-      // Reset the form and hide the error
       setValue(initialFormData);
       setError(false);
 
