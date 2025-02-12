@@ -45,13 +45,11 @@ export const LoginForm = () => {
       setValue(initialFormData);
       setError(false);
 
-      // Set authentication to true in localStorage
       localStorage.setItem("isAuthenticated", "true");
 
-      // Directly redirect to dashboard after successful login
       router.push("/dashbord");
 
-      // Success message (optional)
+      
       Swal.fire({
         title: "Success!",
         text: "Sign in Successfully",
@@ -61,12 +59,12 @@ export const LoginForm = () => {
     }
   };
 
-  // Handle password change and reset error message if valid
+  
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
     setValue({ ...value, password: newPassword });
 
-    // password is 6  characters
+    
     if (newPassword.length >= 6) {
       setPasswordError("");
     }
@@ -92,7 +90,7 @@ export const LoginForm = () => {
               Welcome back! Please enter your details.
             </p>
             <form onSubmit={submitHandle} className="w-full">
-              {/* Email input with validation error */}
+            
               <label
                 htmlFor="email"
                 className="font-medium leading-5 text-black-light"
@@ -193,7 +191,7 @@ export const LoginForm = () => {
           </div>
         </div>
         <div className="max-xl:hidden max-w-[759px] bg-blue-light min-h-[899px] flex items-center justify-center rounded-[20px]">
-          <Image
+          <Image priority={false} className="w-auto h-auto"
             width={617}
             height={541}
             src="/assets/images/blue-image.webp"
