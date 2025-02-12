@@ -1,6 +1,6 @@
 import { InlineWidget } from 'react-calendly';
 
-const CalendlyWidget = () => {
+const Calendly = () => {
 
 
   return (
@@ -14,4 +14,4 @@ const CalendlyWidget = () => {
   );
 };
 
-export default CalendlyWidget;
+export default Calendly;

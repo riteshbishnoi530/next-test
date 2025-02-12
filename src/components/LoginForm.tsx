@@ -16,7 +16,7 @@ export const LoginForm = () => {
 
   const [value, setValue] = useState(initialFormData);
   const [error, setError] = useState(false);
-  const [passwordError, setPasswordError] = useState("");
+  const rejex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,6}$/;
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("isAuthenticated");
@@ -28,13 +28,8 @@ export const LoginForm = () => {
   const submitHandle = (e: React.FormEvent) => {
     e.preventDefault();
     setError(true);
-    setPasswordError("");
 
-    if (value.email !== "" && value.password !== "" && value.checkbox) {
-      if (value.password.length < 6) {
-        setPasswordError("Password must be at least 6 characters long.");
-        return;
-      }
+    if (value.email !== "" && value.password !== "") {
 
       setValue(initialFormData);
       setError(false);
@@ -43,24 +38,13 @@ export const LoginForm = () => {
 
       router.push("/dashbord");
 
-      
+
       Swal.fire({
         title: "Success!",
         text: "Sign in Successfully",
         icon: "success",
         confirmButtonText: "Done",
       });
-    }
-  };
-
-  
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = e.target.value;
-    setValue({ ...value, password: newPassword });
-
-    
-    if (newPassword.length >= 6) {
-      setPasswordError("");
     }
   };
 
@@ -84,7 +68,7 @@ export const LoginForm = () => {
               Welcome back! Please enter your details.
             </p>
             <form onSubmit={submitHandle} className="w-full">
-            
+
               <label
                 htmlFor="email"
                 className="font-medium leading-5 text-black-light"
@@ -101,13 +85,15 @@ export const LoginForm = () => {
                 type="email"
                 id="email"
               />
-              {error && !value.email && (
+              {error && !value.email ? (
                 <p className="text-red-500 text-base font-normal">
                   Email is required
                 </p>
-              )}
+              ) : !rejex.test(value.email) && value.email.length > 0 ? <p className="text-red-500 text-base font-normal">
+                Email is not valid
+              </p> : ""}
 
-              
+
               <label
                 htmlFor="password"
                 className="font-medium leading-5 text-black-light"
@@ -116,21 +102,23 @@ export const LoginForm = () => {
               </label>
               <input
                 value={value.password}
-                onChange={handlePasswordChange}
+                onChange={(e) =>
+                  setValue({ ...value, password: e.target.value })
+                }
                 className="w-full p-[19px_14px] shadow-[0_1px_2px_0_#1018280D] mt-1.5 placeholder:text-gray placeholder:text-sm placeholder:leading-6 border border-solid border-gray-light rounded-lg outline-none"
                 placeholder="••••••••"
                 type="password"
                 id="password"
               />
-              {error && !value.password && (
+              {error && !value.password ? (
                 <p className="text-red-500 text-base font-normal">
                   Password is required
                 </p>
-              )}
-              {passwordError && (
-                <p className="text-red-500 text-base font-normal">{passwordError}</p>
-              )}
-
+              ) : value.password.length < 6 && value.password.length >0 ?
+                <p className="text-red-500 text-base font-normal">
+                  Password must be at least 6 characters long.
+                </p> : ""
+              }
               
               <span className="flex justify-between mt-[18px] max-sm:flex-col">
                 <span className="flex gap-3 items-center">
@@ -151,12 +139,7 @@ export const LoginForm = () => {
                   </label>
                 </span>
               </span>
-              {error && !value.checkbox && (
-                <p className="text-red-500 text-base font-normal">
-                  Please agree to the terms and conditions
-                </p>
-              )}
-
+    
               {/* Submit Button */}
               <button
                 type="submit"
@@ -164,8 +147,9 @@ export const LoginForm = () => {
               >
                 Sign In
               </button>
+            </form>
 
-              <button className="w-full pt-[9px] gap-2.5 pb-2.5 font-medium leading-6 text-sm text-black-light flex mt-1.5 rounded-[9px] justify-center items-center border border-solid border-gray-light">
+            <button className="w-full pt-[9px] gap-2.5 pb-2.5 font-medium leading-6 text-sm text-black-light flex mt-1.5 rounded-[9px] justify-center items-center border border-solid border-gray-light">
                 <Image
                   src={"/assets/images/google-icon.webp"}
                   alt="google logo"
@@ -174,7 +158,6 @@ export const LoginForm = () => {
                 />
                 Sign in with Google
               </button>
-            </form>
 
             <p className="text-center text-base pt-[18px] text-medium-gray leading-6 max-md:text-start">
               Don’t have an account?

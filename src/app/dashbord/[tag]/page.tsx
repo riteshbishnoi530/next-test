@@ -1,18 +1,19 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import ImageUpload from "./ImageUpload";
-import {DASHBOARD_LIST } from "../../utils/helper";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+
 import Link from "next/link";
-import StoreValue from "./StoreValue";
-import Calendarly from "./Calendarly";
+import StoreValue from "@/components/dashbord/StoreValue";
+import { DASHBOARD_LIST } from "@/utils/helper";
+import Calendly from "@/components/dashbord/Calendarly";
+import UploadImage from "@/components/dashbord/ImageUpload";
+import { useEffect, useState } from "react";
+
 
 
 const Dashboard = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const page = searchParams.get("page");
-
+const param = useParams()
+const {tag} = param
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
     router.push("/");
@@ -42,11 +43,11 @@ const Dashboard = () => {
           <h1 className="mb-3 text-center text-4xl font-semibold">Dashboard</h1>
           {DASHBOARD_LIST.map((item, index) => (
             <Link
-              href={`?page=${item.toLowerCase().replace(" ", "-")}`}
+              href={`/dashbord/${item.toLowerCase().replace(" ", "-")}`}
               key={index}
               onClick={() => setOpen(false)}
               className={`${
-                page === item.toLowerCase().replace(" ", "-") &&
+                tag === item.toLowerCase().replace(" ", "-") &&
                 "bg-white text-black"
               } py-2 px-3 rounded-lg cursor-pointer hover:bg-white/50 transition-all duration-300 hover:text-black`}
             >
@@ -84,15 +85,15 @@ const Dashboard = () => {
             ></span>
           </button>
           <h1 className="text-white font-semibold font-inter text-3xl max-md:text-2xl">
-            {page==="values"?"Values":page==="calendly"?"Calendly":page==="images"?"Images":"Dashboard"}
+            {tag==="values"?"Values":tag==="calendly"?"Calendly":tag==="images"?"Images":"Dashboard"}
           </h1>
         </div>
-        {page === "values" ? (
+        {tag === "values" ? (
           <StoreValue />
-        ) : page === "calendly" ? (
-          <Calendarly />
-        ) : page === "images" ? (
-          <ImageUpload />
+        ) : tag === "calendly" ? (
+          <Calendly/>
+        ) : tag === "images" ? (
+          <UploadImage />
         ) : null}
       </div>
     </div>

@@ -1,5 +1,5 @@
-import Dashboard from "@/components/dashbord/Dashbord";
 import { Suspense } from "react";
+import Dashboard from "./[tag]/page";
 
 
 export default function Home() {
